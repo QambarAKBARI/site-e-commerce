@@ -44,8 +44,8 @@ class CommandeConfirmationController extends AbstractController
         }
 
         $user = $this->getUser();
-
         $cartItems = $this->cartService->getDetailCartItem();
+
 
         if (count($cartItems) === 0) {
 
@@ -55,6 +55,7 @@ class CommandeConfirmationController extends AbstractController
         }
         /** @var Commande  */
         $purchase = $form->getData();
+
 
         $this->persister->storePurchase($purchase);
 

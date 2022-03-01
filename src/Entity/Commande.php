@@ -57,7 +57,7 @@ class Commande
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $status;
+    private $status = "PENDING";
 
     public function __construct()
     {
@@ -69,6 +69,16 @@ class Commande
         return $this->id;
     }
 
+
+    /**
+     * @ORM\PrePersist 
+     */
+    public function prePersist()
+    {
+        if (empty($this->dateCommande)) {
+            $this->dateCommande = new \DateTime();
+        }
+    }
     public function getDateCommande(): ?\DateTimeInterface
     {
         return $this->dateCommande;
