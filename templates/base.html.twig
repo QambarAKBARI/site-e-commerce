@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    </head>
+    <body>
+        <header class="container">
+            <nav class="nav">
+                <a class="nav-link" href="{{ path('home')}}" >Acceuil</a>
+                    <a class="nav-link" href="{{ path('new_categorie')}}" >Categorie</a>
+                    <a class="nav-link" href="{{ path('new_sous_categorie')}}" >SousCategorie</a>
+                    <a class="nav-link" href="{{ path('new_marque')}}" >Marque</a>
+                    <a class="nav-link" href="{{ path('new_produit')}}" >Produit</a>
+                {% if app.user %}
+                    <a class="nav-link" href="{{ path('user_account_show', {id: app.user.id}) }}">Bienvenue {{ app.user.nom }} <i class="fa-solid fa-user"></i></a>
+                    <a class="nav-link" href="{{ path('app_logout') }}">Se déconnecter</a>
+                {% else %}
+                     <a class="nav-link" href="{{ path('app_login') }}">Se connecter</a>
+                     <a class="nav-link" href="{{ path('app_register') }}">Inscription</a>
+                {% endif %}
+            </nav>
+        </header>
+        <div class="container pt-5">
+			{% for rubrique , messages in app.flashes %}
+				<div class="alert alert-{{rubrique}}">
+					{% for message in messages %}
+						<p>{{message}}</p>
+					{% endfor %}
+				</div>
+			{% endfor %}
+		</div>
+
+        {% block body %}
+
+        
+        {% endblock %}
+    </body>
+</html>

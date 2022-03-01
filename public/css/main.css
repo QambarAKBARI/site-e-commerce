@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@1,300&display=swap');
+*{
+    box-sizing: border-box;
+    font-family: 'Lato', sans-serif;
+}
+a{
+    text-decoration: none;
+}
+
+.container{
+    max-width: 1200px;
+    margin: auto;
+}
+.nav{
+    width: 100%;
+}
+.nav-link{
+    text-decoration: none;
+    display: inline-block;
+    margin-left: .7em;
+    font-weight: 900;
+    letter-spacing: 2px;
+    font-size: large;
+    color: black;
+}
+.products{
+    display: grid;
+    grid-template-columns: repeat(4, 290px);
+    grid-gap: 10px;
+   
+
+}
+.product{
+    border: 1px solid brown;
+    width: 100%;
+}
+img{
+    width: 100%;
+}
+
+table{
+    width: 100%;
+    text-align: center;
+}
+figure{
+    height: 110px;
+    width: 110px;
+}
+
+.product-details, .recap-products{
+    display: flex;
+}
+
+.icons{
+    text-decoration: none;
+    color: brown;
+    font-size: 1.5em;
+    font-weight: 900;
+}
+.icons.icon-qtt{
+    margin: 0 0.5em;
+}
+
+
+.recap-product-img{
+    width: 510px;
+    height: 314px;
+}
+label, input{
+    padding: 1em;
+    width: 50%;
+}
