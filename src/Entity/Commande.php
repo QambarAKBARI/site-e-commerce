@@ -12,6 +12,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Commande
 {
+
+    public const STATUS_PENDING = 'PENDING';
+    public const STATUS_PAID = 'PAID';
+    
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -49,6 +53,11 @@ class Commande
      * @ORM\OneToMany(targetEntity=ProduitCommande::class, mappedBy="commande", orphanRemoval=true)
      */
     private $produitCommandes;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $status;
 
     public function __construct()
     {
@@ -146,6 +155,18 @@ class Commande
                 $produitCommande->setCommande(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

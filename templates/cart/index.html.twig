@@ -66,16 +66,17 @@
 
         </div>
         {% if app.user %}
-        <h2>Confirmez votre commande e remplissant ce formulaire</h2>
-        {{ form_start(confirmationForm, {'action':  path('commande_confirm')})}}
-        {{ form_widget(confirmationForm) }}
-        <button type="submit" class="btn btn-success">
-        Je confirme</button>
-        {{ form_end(confirmationForm) }}
+            <h2>Confirmez votre commande en remplissant ce formulaire</h2>
+            {{ form_start(confirmationForm, {'action':  path('commande_confirm')})}}
+            {{ form_widget(confirmationForm) }}
+            <button type="submit" class="btn btn-success">
+                Je confirme
+            </button>
+            {{ form_end(confirmationForm) }}
         {% else %}
             <h2>Vous devez être connecté pour confirmer cette commande</h2>
-            <a href=" {{path('app_login')}}" class ="btn btn-success">conexion</a>
-            ou <a href="#">Créez un compte</a>
+            <a href=" {{path('app_login')}}" class ="btn btn-success">connexion</a>ou
+            <a href="app_register">Créez un compte</a>
         {% endif %}
        
     {% else %}
