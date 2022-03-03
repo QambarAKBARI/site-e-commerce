@@ -7,19 +7,19 @@ use App\Entity\Commande;
 class StripeService
 
 {
+    
     protected $secretKey;
     protected $publickey;
-
+    
     public function __construct(string $secretKey, string $publicKey)
     {
-
+        
         $this->secretKey = $secretKey;
         $this->publickey = $publicKey;
     }
 
     public function getPublicKey(): string
     {
-
         return $this->publickey;
     }
 
@@ -28,7 +28,7 @@ class StripeService
         \Stripe\Stripe::setApiKey($this->secretKey);
 
         return \Stripe\PaymentIntent::create([
-            'amount' => $purchase->getTotal(),
+            'amount' => $purchase->getTotal() * 100,
             'currency' => 'eur'
         ]);
     }

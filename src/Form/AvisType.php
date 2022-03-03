@@ -14,8 +14,6 @@ class AvisType extends AbstractType
         $builder
             ->add('texte')
             ->add('note')
-            ->add('user')
-            ->add('produit')
         ;
     }
 

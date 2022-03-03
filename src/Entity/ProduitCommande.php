@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Repository\ProduitCommandeRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -33,6 +32,11 @@ class ProduitCommande
      * @ORM\JoinColumn(nullable=false)
      */
     private $produit;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $total;
 
     public function getId(): ?int
     {
@@ -71,6 +75,18 @@ class ProduitCommande
     public function setProduit(?Produit $produit): self
     {
         $this->produit = $produit;
+
+        return $this;
+    }
+
+    public function getTotal(): ?int
+    {
+        return $this->total;
+    }
+
+    public function setTotal(?int $total): self
+    {
+        $this->total = $total;
 
         return $this;
     }

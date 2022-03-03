@@ -76,7 +76,7 @@
         {% else %}
             <h2>Vous devez être connecté pour confirmer cette commande</h2>
             <a href=" {{path('app_login')}}" class ="btn btn-success">connexion</a>ou
-            <a href="app_register">Créez un compte</a>
+            <a href="{{ path('app_register') }}">Créez un compte</a>
         {% endif %}
        
     {% else %}

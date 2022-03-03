@@ -25,15 +25,13 @@ class CommandePersister
     public function storePurchase(Commande $purchase)
     {
         $purchase->setUser($this->security->getUser());
-
+        $purchase->setDateCommande(new \DateTime('now'));
         $this->em->persist($purchase);
-
+    
         foreach ($this->cartService->getDetailCartItem() as $cartItem) {
             $purchaseItem = new ProduitCommande;
             $purchaseItem->setCommande($purchase)
                 ->setProduit($cartItem->produit)
-                ->setNomProduit($cartItem->produit->getNom())
-                ->setPrix($cartItem->produit->getPrix())
                 ->setQuantite($cartItem->qtt)
                 ->setTotal($cartItem->getTotal());
                 $purchase->addProduitCommande($purchaseItem);

@@ -57,7 +57,12 @@ class Commande
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $status;
+    private $status = "PENDING";
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $total;
 
     public function __construct()
     {
@@ -68,6 +73,8 @@ class Commande
     {
         return $this->id;
     }
+
+
 
     public function getDateCommande(): ?\DateTimeInterface
     {
@@ -170,4 +177,23 @@ class Commande
 
         return $this;
     }
+
+    public function getTotal(): ?int
+    {
+        $total = 0;
+
+        foreach ($this->produitCommandes as $item) {
+            $total += $item->getTotal();
+        }
+        return $this->total = $total;
+    }
+
+    public function setTotal(?int $total): self
+    {
+        $this->total = $total;
+
+        return $this;
+    }
+
+
 }

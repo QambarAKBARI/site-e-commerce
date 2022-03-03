@@ -12,7 +12,7 @@
         </figure>  
         <div class="recap-product-info">  
             <p>{{ produit.nomProduit }}</p>
-            <p>{{ produit.prix }}</p>
+            <p>{{ produit.prix|amount }}</p>
             <p>{{ produit.description }}</p>
         </div>
     </div>
@@ -21,7 +21,25 @@
         <p>{{ avis.texte}}</p>
         <p>{{ avis.user.nom}}</p>
         <p>{{ avis.note}}</p>
+        <a href="{{ path('avis_edit', {id: avis.id}) }}">Editer</a>
     {% endfor %}
-    <a href="#">ajouter votre avis</a>
+
+    {% if app.user %}
+
+        {{ form_start(formAvis, {'action':  path('avis_add', {id: produit.id})})}}
+        {{ form_row(formAvis.texte, {'label' : 'message'})}}
+        {{ form_row(formAvis.note, {'label' : 'Votre note en nombre entier'})}}
+        <button type="submit">
+           Ajouter votre commentaire
+        </button>
+        {{ form_end(formAvis)}}
+        
+
+    {% else %}
+        <h2>Vous devez être connecté pour pouvoir commenter</h2>
+        <a href=" {{path('app_login')}}" class ="btn btn-success">Se connecter</a> ou
+        <a href="{{ path('app_register') }}">Créez un compte</a>
+    {% endif %}
+    
 </div>    
 {% endblock %}

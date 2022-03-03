@@ -9,14 +9,12 @@
             <link rel="stylesheet" href="{{ asset('css/main.css') }}">
         {% endblock %}
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
+        
     </head>
     <body>
         <header class="container">
             <nav class="nav">
-                <a class="nav-link" href="{{ path('home')}}" >Acceuil</a>
+                <a class="nav-link" href="{{ path('home')}}" >Accueil</a>
                     <a class="nav-link" href="{{ path('new_categorie')}}" >Categorie</a>
                     <a class="nav-link" href="{{ path('new_sous_categorie')}}" >SousCategorie</a>
                     <a class="nav-link" href="{{ path('new_marque')}}" >Marque</a>
@@ -39,10 +37,11 @@
 				</div>
 			{% endfor %}
 		</div>
-
+        
         {% block body %}
 
         
         {% endblock %}
+        {% block javascripts %}{% endblock %}
     </body>
 </html>

@@ -70,3 +70,6 @@ label, input{
     padding: 1em;
     width: 50%;
 }
+ul {
+    list-style-type: none;
+  }

@@ -18,14 +18,14 @@ class CommandePaiementController extends AbstractController
      */
     public function showCardForm($id, CommandeRepository $purchaseRepository, StripeService $stripeService)
     {
-        $purchase = $purchaseRepository->find($id);
 
+        $purchase = $purchaseRepository->find($id);
         if (!$purchase || $purchase && $purchase->getUser() !== $this->getUser() || $purchase && $purchase->getStatus() === Commande::STATUS_PAID) {
 
             return $this->redirectToRoute('cart_show');
         }
         $intent = $stripeService->getPaymentIntent($purchase);
-        return $this->render('purchase/payment.html.twig', [
+        return $this->render('commande/paiement.html.twig', [
 
             'clientSecret' => $intent->client_secret,
             'purchase' => $purchase,

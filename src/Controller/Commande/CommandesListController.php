@@ -19,7 +19,7 @@ class CommandesListController extends AbstractController
         /** @var User */
         $user = $this->getUser();
 
-        return $this->render('purchase/index.html.twig', [
+        return $this->render('commande/index.html.twig', [
             'purchases' => $user->getCommandes()
         ]);
     }
