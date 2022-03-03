@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+    <main class="container">
+        <a href="{{ path('cart_show') }}" ><i class="fa-solid fa-cart-shopping fa-3x"></i><span>{{ panier|length}}</span></a>
+        <div class="products">
+        {% for produit in produits %}
+            <div class="product">
+                <a href="{{ path('show_produit', {id: produit.id}) }}">
+                    <img src="{{ produit.image }}" alt="{{produit.nomProduit}}">
+                </a>
+                <a href="{{ path('show_produit', {id: produit.id}) }}"> {{ produit.nomProduit }} </a>
+                <p> {{ produit.prix|number_format(2, '.', ',') }} € </p>
+                <a href="{{ path('cart_add', {id: produit.id}) }}?returnToHome=true">ajouter</a>
+                <a href="{{ path('edit_produit', {id: produit.id}) }}">éditer</a>
+                <a href="{{ path('delete_product', {id: produit.id}) }}">supprimer</a>
+            </div> 
+        {% endfor %}
+        </div>
+    </main>    
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un user !{% endblock %}
+
+{% block body %}
+<div class='container'>
+
+    <h1>Ajouter un User !</h1>
+ 
+
+
+    {{ form_start(formUser) }}
+    {{ form_row(formUser.nom) }}
+    {{ form_row(formUser.prenom) }}
+    {{ form_row(formUser.password) }}
+    {{ form_row(formUser.email) }}
+    {{ form_row(formUser.adresse) }}
+    {{ form_row(formUser.ville) }}
+    {{ form_row(formUser.cp) }}
+    <input type="submit" value="Enregistrer" class="btn btn-success">
+    {{ form_end(formUser) }}
+</div>
+{% endblock %}

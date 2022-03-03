@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AvisController!{% endblock %}
+
+{% block body %}
+    {% for a in avis %}
+        <p>{{ a.texte }}</p>
+        <p>{{ a.note }}</p>
+    {% else %}
+        <p>Vous n'avez pas de commentaire encore</p>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}detail produit{% endblock %}
+
+{% block body %}
+
+<div class='container'>
+    <div class="recap-products">
+
+        <figure class="recap-product-img">
+            <img src="{{ produit.image }}">
+        </figure>  
+        <div class="recap-product-info">  
+            <p>{{ produit.nomProduit }}</p>
+            <p>{{ produit.prix|amount }}</p>
+            <p>{{ produit.description }}</p>
+        </div>
+    </div>
+    <h2>Les avis</h2>
+    {% for avis in produit.avis %}
+        <p>{{ avis.texte}}</p>
+        <p>{{ avis.user.nom}}</p>
+        <p>{{ avis.note}}</p>
+        <a href="{{ path('avis_edit', {id: avis.id}) }}">Editer</a>
+    {% endfor %}
+
+    {% if app.user %}
+
+        {{ form_start(formAvis, {'action':  path('avis_add', {id: produit.id})})}}
+        {{ form_row(formAvis.texte, {'label' : 'message'})}}
+        {{ form_row(formAvis.note, {'label' : 'Votre note en nombre entier'})}}
+        <button type="submit">
+           Ajouter votre commentaire
+        </button>
+        {{ form_end(formAvis)}}
+        
+
+    {% else %}
+        <h2>Vous devez être connecté pour pouvoir commenter</h2>
+        <a href=" {{path('app_login')}}" class ="btn btn-success">Se connecter</a> ou
+        <a href="{{ path('app_register') }}">Créez un compte</a>
+    {% endif %}
+    
+</div>    
+{% endblock %}
