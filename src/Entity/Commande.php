@@ -58,11 +58,14 @@ class Commande
      * @ORM\Column(type="string", length=100)
      */
     private $status = "PENDING";
+<<<<<<< HEAD
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
     private $total;
+=======
+>>>>>>> 593d27318c86778a50411433e9d10418c18769ba
 
     public function __construct()
     {
@@ -75,7 +78,19 @@ class Commande
     }
 
 
+<<<<<<< HEAD
 
+=======
+    /**
+     * @ORM\PrePersist 
+     */
+    public function prePersist()
+    {
+        if (empty($this->dateCommande)) {
+            $this->dateCommande = new \DateTime();
+        }
+    }
+>>>>>>> 593d27318c86778a50411433e9d10418c18769ba
     public function getDateCommande(): ?\DateTimeInterface
     {
         return $this->dateCommande;

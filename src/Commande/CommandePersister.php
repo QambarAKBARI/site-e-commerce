@@ -26,14 +26,22 @@ class CommandePersister
     {
         $purchase->setUser($this->security->getUser());
         $purchase->setDateCommande(new \DateTime('now'));
+<<<<<<< HEAD
+=======
+        
+>>>>>>> 593d27318c86778a50411433e9d10418c18769ba
         $this->em->persist($purchase);
     
         foreach ($this->cartService->getDetailCartItem() as $cartItem) {
             $purchaseItem = new ProduitCommande;
             $purchaseItem->setCommande($purchase)
                 ->setProduit($cartItem->produit)
+<<<<<<< HEAD
                 ->setQuantite($cartItem->qtt)
                 ->setTotal($cartItem->getTotal());
+=======
+                ->setQuantite($cartItem->qtt);
+>>>>>>> 593d27318c86778a50411433e9d10418c18769ba
                 $purchase->addProduitCommande($purchaseItem);
             $this->em->persist($purchaseItem);
     

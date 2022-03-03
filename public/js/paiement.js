@@ -3,7 +3,10 @@ const elements = stripe.elements();
 
 const card = elements.create("card");
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 593d27318c86778a50411433e9d10418c18769ba
 // Stripe injects an iframe into the DOM
 card.mount("#card-element");
 card.on("change", function (event) {
@@ -27,7 +30,11 @@ form.addEventListener("submit", function (event) {
     .then(function (result) {
       if (result.error) {
         // Show error to your customer
+<<<<<<< HEAD
         document.getElementById("errors").innerText = result.error.message;
+=======
+        console.log(result.error.message);
+>>>>>>> 593d27318c86778a50411433e9d10418c18769ba
       } else {
         // The payment succeeded!
         window.location.href = redirectAfterSuccessUrl;
