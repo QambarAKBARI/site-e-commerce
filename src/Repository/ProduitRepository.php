@@ -19,6 +19,23 @@ class ProduitRepository extends ServiceEntityRepository
         parent::__construct($registry, Produit::class);
     }
 
+
+    public function getPaginatedProducts($page, $limit){
+        $query = $this->createQueryBuilder('p')
+                      ->orderBy('p.id', 'desc')
+                      ->setFirstResult($page * $limit - $limit)
+                      ->setMaxResults($limit);
+        return $query->getQuery()->getResult();
+    }
+
+
+    public function getTotalProducts(){
+        $query = $this->createQueryBuilder('p')
+                      ->select('COUNT(p.id)');
+        return $query->getQuery()->getSingleScalarResult();
+    }
+
+
     // /**
     //  * @return Produit[] Returns an array of Produit objects
     //  */

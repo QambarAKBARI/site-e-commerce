@@ -26,6 +26,7 @@ class CommandePersister
     {
         $purchase->setUser($this->security->getUser());
         $purchase->setDateCommande(new \DateTime('now'));
+        $purchase->setTotal($this->cartService->getTotal());
         $this->em->persist($purchase);
     
         foreach ($this->cartService->getDetailCartItem() as $cartItem) {

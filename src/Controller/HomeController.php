@@ -6,6 +6,7 @@ use App\Entity\Avis;
 use App\Form\AvisType;
 use App\Entity\Produit;
 use App\Repository\ProduitRepository;
+use App\Service\Cart\CartService;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,13 +28,20 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function index(ProduitRepository $produits, SessionInterface $session): Response
+    public function index(ProduitRepository $produits, SessionInterface $session, Request $request, CartService $cartService): Response
     {
+
+        $limit = 8;
+        $page = (int)$request->query->get("page", 1);
+        $total = $produits->getTotalProducts();
+
         //$panier = [];
-        $panier = $session->get('cart', []);
         return $this->render('home/index.html.twig', [
-            'produits' => $produits->findAll(),
-            'panier'   => $panier
+            'produits' => $produits->getPaginatedProducts($page, $limit),
+            'totalPage'   => $total,
+            'limit' => $limit,
+            'page' => $page,
+            'cartService' => $cartService,
         ]);
     }
 

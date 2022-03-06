@@ -73,3 +73,9 @@ label, input{
 ul {
     list-style-type: none;
   }
+button.disabled{
+    background-color: brown;
+}
+button.active{
+    background-color: green;
+}

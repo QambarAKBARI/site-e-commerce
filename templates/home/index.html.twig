@@ -4,7 +4,6 @@
 
 {% block body %}
     <main class="container">
-        <a href="{{ path('cart_show') }}" ><i class="fa-solid fa-cart-shopping fa-3x"></i><span>{{ panier|length}}</span></a>
         <div class="products">
         {% for produit in produits %}
             <div class="product">
@@ -18,6 +17,25 @@
                 <a href="{{ path('delete_product', {id: produit.id}) }}">supprimer</a>
             </div> 
         {% endfor %}
+        </div>
+        <div class="pagination">
+        {% set pages = (totalPage / limit)|round(0, 'ceil') %}
+        <button class="{{ (page == 1) ? 'disabled' : '' }}">
+            <a href="{{ (page == 1) ? '?page=' ~ (page - 1) : '' }}">
+                <i class="fa-solid fa-angle-left"></i>
+            </a>
+        </button>
+            
+            {% for item in 1..pages %}
+                <button class="{{ (page == item) ? 'active' : '' }}">
+                    <a href="?page={{ item }}">{{ item }}</a>
+                </button>
+            {% endfor %}
+        <button class="{{ (page == pages) ? 'disabled' : '' }}">
+            <a href="{{ (page < pages) ? '?page=' ~ (page + 1) : '' }}">
+                <i class="fa-solid fa-angle-right"></i>
+            </a>
+        </button>
         </div>
     </main>    
 {% endblock %}

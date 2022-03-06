@@ -1,0 +1,30 @@
+<h1>Merci pour votre commande n°{{purchase.id}}</h1>
+<p>merci à vous{{user.nom}} {{user.prenom}}</p>
+<table>
+  <thead>
+    <th>produit</th>
+    <th>Quantité</th>
+    <th>Prix unitaire</th>
+    <th>Total</th>
+  </thead>
+  <tbody>
+    {% for item in purchase.produitCommandes %}
+      <tr>
+        <td>{{item.produit.nomProduit}}</td>
+        <td>{{item.quantite}}</td>
+        <td>{{item.produit.prix|amount}}</td>
+        <td>{{item.total|amount}}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="3">
+        Total :
+      </td>
+      <td>
+        {{purchase.total|amount}}
+      </td>
+    </tr>
+  </tfoot>
+</table>
