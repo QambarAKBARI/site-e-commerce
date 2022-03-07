@@ -14,7 +14,7 @@ class PdfService
 
     protected $twig;
 
-    public function __construct()
+    public function __construct(Environment $twig)
     {
         $this->domPdf = new DomPdf();
 
@@ -67,4 +67,23 @@ class PdfService
         $this->domPdf->output();
     }
 
+    public function indexAction()
+    {
+        $snappy = $this->get('knp_snappy.pdf');
+        
+        $html = $this->twig->render('sandboxBundle:Default:template.html.twig', array(
+            //..Send some data to your view if you need to //
+        ));
+        
+        $filename = 'myFirstSnappyPDF';
+
+        return new Response(
+            $snappy->getOutputFromHtml($html),
+            200,
+            array(
+                'Content-Type'          => 'application/pdf',
+                'Content-Disposition'   => 'inline; filename="'.$filename.'.pdf"'
+            )
+        );
+    }
 }

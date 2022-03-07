@@ -2,11 +2,8 @@ knp_snappy:
     pdf:
         enabled:    true
         binary:     '%env(WKHTMLTOPDF_PATH)%'
-        options:    
-            no-outline: true
-            page-size: LETTER
-            # Recommended to set UTF-8 as default encoding :)
-            encoding: UTF-8
+        options:    [] 
+
     image:
         enabled:    true
         binary:     '%env(WKHTMLTOIMAGE_PATH)%'

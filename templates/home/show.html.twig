@@ -21,7 +21,9 @@
         <p>{{ avis.texte}}</p>
         <p>{{ avis.user.nom}}</p>
         <p>{{ avis.note}}</p>
-        <a href="{{ path('avis_edit', {id: avis.id}) }}">Editer</a>
+        <a href="#">Editer</a>
+    {% else %}
+        <p>Pas de avis encore pour ce produit</p>
     {% endfor %}
 
     {% if app.user %}
