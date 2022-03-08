@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}edit ou ajout{% endblock %}
+
+{% block body %}     
+       
+   {{ form_start(formAvis, {'action':  path('avis_add', {id: produit.id})})}}
+   {{ form_row(formAvis.texte, {'label' : 'message'})}}
+   {{ form_row(formAvis.note, {'label' : 'Votre note en nombre entier'})}}
+   <button type="submit">
+      Ajouter votre commentaire
+   </button>
+   {{ form_end(formAvis)}}
+
+{% endblock %}        

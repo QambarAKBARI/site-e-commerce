@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AvisController!{% endblock %}
+
+{% block body %}
+    {% for commande in commandes %}
+        <p>{{ commande.id }}</p>
+        <p>{{ commande.dateCommande|date('d/m/y h:i') }}</p>
+    {% else %}
+        <p>Vous n'avez pas de commande encore</p>
+    {% endfor %}
+{% endblock %}

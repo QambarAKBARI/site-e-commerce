@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="admin-control">
+        
+            <div class="admin-products">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Produit</th>
+                            <th>Quantité</th>
+                            <th>Prix unitaire</th>
+                            <th>Quantité Restant</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for produit in produits %}
+
+                            <tr>
+                                <td>
+                                    <div class="product-details">
+                                        <figure>
+                                            <img src="{{ produit.image }}" alt="{{produit.nomProduit}}">
+                                        </figure>    
+                                        <p><a href="{{ path('show_produit', {id: produit.id}) }}">{{ produit.nomProduit }}</a></p>
+                                    </div>
+                                </td>
+                                <td>{{ produit.quantite}}</td>
+                                <td>{{ produit.prix|number_format(2, '.', ',') }} €</td>
+                                <td></td>
+                            
+                                <td>
+                                    <a href="{{ path('cart_delete', {id: produit.id}) }}">
+                                        <span class="icons">&times;</span>
+                                    </a>
+                                </td> 
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="admin-listing">
+                <div class="admin-list">
+                    <a href="{{ path('commandes_list') }}"><h6>Liste des commandes</h6></a>
+                    <a href="{{ path('users_list') }}"><h6>Liste des utilisateurs</h6></a>
+                </div>
+            
+
+                <div class="admin-commande">
+                        <a class="btn-new" href="{{ path('new_categorie') }}">New Categorie</a>
+                        <a class="btn-new" href="{{ path('new_marque') }}">New Marque</a>
+                        <a class="btn-new" href="{{ path('new_produit') }}">New Produit</a>
+                        <a class="btn-new" href="{{ path('new_sous_categorie') }}">New SousCategorie</a>
+                </div>
+            </div>
+    </div>
+</div>
+{% endblock %}

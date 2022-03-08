@@ -1,0 +1,79 @@
+{% apply inline_css %}
+    <style>
+        .styled-table {
+                border-collapse: collapse;
+                margin: 25px 0;
+                font-size: 0.9em;
+                font-family: sans-serif;
+                min-width: 400px;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+                text-align:center;
+        }
+        .styled-table thead tr, .styled-table tfoot tr {
+                  background-color: #009879;
+                  color: #ffffff;
+                  text-align: left;
+        }
+        th, td {
+                padding: 12px 15px;
+        }
+        .styled-table tbody tr {
+            border-bottom: 1px solid #dddddd;
+        }
+
+        .styled-table tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+
+        .styled-table tbody tr:last-of-type {
+            border-bottom: 2px solid #009879;
+        }
+        .styled-table tbody tr.active-row {
+            font-weight: bold;
+            color: #009879;
+        }
+        h3{
+          color: #009879;
+        }
+        p{
+          font-size: 0.9em;
+          color: #151D3B;
+        }
+        span{
+          color: #630606;
+          text-transform:uppercase;
+        }
+
+    </style>
+<h3>Merci pour votre commande n°{{purchase.id}}</h3>
+<p>Merci à vous <span>{{user.nom}} {{user.prenom}}</span> pour cet achat</p>
+<p>A bientôt</p>
+<table class="styled-table">
+  <thead>
+    <th>Produit</th>
+    <th>Quantité</th>
+    <th>Prix unitaire</th>
+    <th>Total</th>
+  </thead>
+  <tbody>
+    {% for item in purchase.produitCommandes %}
+      <tr class="active-row">
+        <td>{{item.produit.nomProduit}}</td>
+        <td>{{item.quantite}}</td>
+        <td>{{item.produit.prix|amount}}</td>
+        <td>{{item.total|amount}}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="3">
+        Total :
+      </td>
+      <td>
+        {{purchase.total|amount}}
+      </td>
+    </tr>
+  </tfoot>
+</table>
+{% endapply %}
