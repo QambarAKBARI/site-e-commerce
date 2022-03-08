@@ -1,0 +1,49 @@
+{% apply inline_css %}
+    <style>
+        table {
+                border-collapse: collapse;
+                margin: 25px 0;
+                font-size: 0.9em;
+                font-family: sans-serif;
+                min-width: 400px;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        }
+        thead tr {
+                  background-color: #009879;
+                  color: #ffffff;
+                  text-align: left;
+        }
+        th, td {
+                padding: 12px 15px;
+        }
+
+    </style>
+<table>
+  <thead>
+    <th>produit</th>
+    <th>Quantité</th>
+    <th>Prix unitaire</th>
+    <th>Total</th>
+  </thead>
+  <tbody>
+    {% for item in purchase.produitCommandes %}
+      <tr>
+        <td>{{item.produit.nomProduit}}</td>
+        <td>{{item.quantite}}</td>
+        <td>{{item.produit.prix|amount}}</td>
+        <td>{{item.total|amount}}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="3">
+        Total :
+      </td>
+      <td>
+        {{purchase.total|amount}}
+      </td>
+    </tr>
+  </tfoot>
+</table>
+{% endapply %}

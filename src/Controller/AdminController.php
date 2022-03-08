@@ -10,6 +10,9 @@ use App\Form\ProduitType;
 use App\Form\CategorieType;
 use App\Entity\SousCategorie;
 use App\Form\SousCategorieType;
+use App\Repository\UserRepository;
+use App\Repository\ProduitRepository;
+use App\Repository\CommandeRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,10 +24,30 @@ class AdminController extends AbstractController
     /**
      * @Route("/admin", name="admin")
      */
-    public function index(): Response
+    public function index(ProduitRepository $produits): Response
     {
         return $this->render('admin/index.html.twig', [
-            'controller_name' => 'AdminController',
+            'produits' => $produits->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/admin/commandes/list", name="commandes_list")
+     */
+    public function showCommandes(CommandeRepository $commandes): Response
+    {
+        return $this->render('admin/commandes.html.twig', [
+            'commandes' => $commandes->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/admin/users/list", name="users_list")
+     */
+    public function showUsers(UserRepository $users): Response
+    {
+        return $this->render('admin/users.html.twig', [
+            'users' => $users->findAll(),
         ]);
     }
 

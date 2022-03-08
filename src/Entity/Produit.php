@@ -235,4 +235,8 @@ class Produit
 
         return $this;
     }
+
+    public function getNbProduitDispo(){
+        return 3;
+    }
 }

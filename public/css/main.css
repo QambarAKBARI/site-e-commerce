@@ -1,7 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,300&display=swap');
 *{
     box-sizing: border-box;
-    font-family: 'Lato', sans-serif;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
 }
 a{
     text-decoration: none;
@@ -11,6 +13,96 @@ a{
     max-width: 1200px;
     margin: auto;
 }
+
+button{
+    min-width: 50px;
+}
+
+.__PrivateStripeElement-input{
+    padding: 1.5em;
+}
+
+/* CSS */
+.btn-new {
+    display: block;
+  align-items: center;
+  background-color: #06f;
+  border: 2px solid #06f;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  fill: #000;
+  font-family: Inter,sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  height: 48px;
+  justify-content: center;
+  letter-spacing: -.8px;
+  line-height: 24px;
+  min-width: 140px;
+  outline: 0;
+  padding: 0 17px;
+  text-align: center;
+  text-decoration: none;
+  transition: all .3s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-58:focus {
+  color: #171e29;
+}
+
+.button-58:hover {
+  background-color: #3385ff;
+  border-color: #3385ff;
+  fill: #06f;
+}
+
+.button-58:active {
+  background-color: #3385ff;
+  border-color: #3385ff;
+  fill: #06f;
+}
+
+@media (min-width: 768px) {
+  .button-58 {
+    min-width: 170px;
+  }
+}
+
+
+/* CSS */
+.btn-success {
+    background-color: #13aa52;
+    border: 1px solid #13aa52;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, .1) 0 2px 4px 0;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 10px 25px;
+    text-align: center;
+    transform: translateY(0);
+    transition: transform 150ms, box-shadow 150ms;
+
+  }
+  
+  .btn-success:hover {
+    box-shadow: rgba(0, 0, 0, .15) 0 3px 9px 0;
+    transform: translateY(-2px);
+  }
+  
+  @media (min-width: 768px) {
+    .btn-success {
+      padding: 10px 30px;
+    }
+  }
+/* HomePage Style */
 .nav{
     width: 100%;
 }
@@ -30,25 +122,62 @@ a{
    
 
 }
-.product{
-    border: 1px solid brown;
+.product-item{
+    border: 1px solid #eee;
+	margin-bottom: 30px;
     width: 100%;
 }
+.product-item .product-content {
+	padding: 30px;
+	position: relative;
+}
+
+.product-item .product-content h4 {
+	font-size: 17px;
+	color: #1a6692;
+	margin-bottom: 20px;
+}
+
+.product-item .product-content p {
+	position: absolute;
+	top: 30px;
+	right: 30px;
+	font-size: 18px;
+	color: #121212;
+}
+
+.product-item .product-content a, .recap-product-info a {
+    color: white;
+}
+
+.product-item .product-content span {
+    margin-left: 0.4em;
+}
+
+.product-item .product-content button, .recap-product-info button {
+    border: none;
+    outline: 0;
+    padding: 12px;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+  }
+
+
 img{
     width: 100%;
+}
+
+.price{
+    color: grey;
+    font-size: 22px;
 }
 
 table{
     width: 100%;
     text-align: center;
-}
-figure{
-    height: 110px;
-    width: 110px;
-}
-
-.product-details, .recap-products{
-    display: flex;
 }
 
 .icons{
@@ -69,4 +198,55 @@ figure{
 label, input{
     padding: 1em;
     width: 50%;
+}
+ul {
+    list-style-type: none;
+  }
+button.disabled{
+    background-color: brown;
+}
+button.active{
+    background-color: #13aa52;
+}
+
+
+
+/* Admin Style */
+
+.admin-control{
+    display: flex;
+}
+
+.admin-products{
+    flex: 3;
+}
+.admin-listing{
+    flex: 1;
+}
+button{
+    display: block;
+}
+
+nav{
+    
+}
+
+header{
+    height: 80px;
+    padding: 1em;
+}
+
+/* showProduct Style */
+
+figure{
+    height: 110px;
+    width: 110px;
+}
+
+.product-details, .recap-products, .perssonel-info{
+    display: flex;
+    justify-content:space-evenly;
+}
+.recap-products{
+    margin-bottom: 50px;
 }

@@ -6,6 +6,8 @@ use App\Entity\User;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class UserController extends AbstractController
 {
@@ -18,4 +20,6 @@ class UserController extends AbstractController
             'user' => $user,
         ]);
     }
+
+
 }

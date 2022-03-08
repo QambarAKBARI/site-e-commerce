@@ -3,6 +3,27 @@
 {% block title %}Hello UserController!{% endblock %}
 
 {% block body %}
-    <p>{{ user.nom }}</p>
-    <p>{{ user.prenom }}</p>
+<div>
+    <h3>Information</h3>
+    <hr>
+    <div class="perssonel-info">
+        <div>
+            <p>Nom : {{ user.nom }}</p>
+            <p>Prénom : {{ user.prenom }}</p>
+            <p>Email : {{ user.email }}</p>
+        </div>
+        <div>
+            <p>Adresse : {{ user.adresse }}</p>
+            <p>Ville : {{ user.ville }}</p>
+            <p>Code Postale : {{ user.cp }}</p>
+        </div>
+        <div>
+            <a class='btn-success' href="#">Editer mon profile</a>
+
+        </div>
+    </div>
+    <hr>
+</div>    
+    <p><a href="{{ path('purchase_index') }}">Récapitulatifs de mes commandes</a></p>
+    <a href="{{ path('avis_index') }}">Voir mes avis sur les produits</a>
 {% endblock %}

@@ -49,6 +49,11 @@ class CartController extends AbstractController
         if ($request->query->get('returnToHome')) {
             return $this->redirectToRoute('home');
         }
+        if ($request->query->get('returnToProduct')) {
+            return $this->redirectToRoute('show_produit', [
+                'id' => $produit->getId()  
+            ]);
+        }
 
     }
 
@@ -63,7 +68,8 @@ class CartController extends AbstractController
         return $this->render('cart/index.html.twig', [
             'total' => $total,
             'items' => $detaileCart,
-            'confirmationForm'=>$form->createView()
+            'confirmationForm'=>$form->createView(),
+            'cartService' => $this->cartservice
 
         ]);
     }
