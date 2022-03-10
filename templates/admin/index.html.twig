@@ -3,20 +3,64 @@
 {% block title %}Hello AdminController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<div class="container">
+    <div class="admin-control">
+        
+            <div class="admin-products">
+                <table>
+                    <thead class="cart-thead">
+                        <tr>
+                            <th>Produit</th>
+                            <th>Nom Produit</th>
+                            <th>Quantité</th>
+                            <th>Prix unitaire</th>
+                            <th>Quantité Restant</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody class="cart-tbody">
+                        {% for produit in produits %}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/Pc/OneDrive/Bureau/Mon_projet_Couches_Lavables/mon_site_couches_lavables/src/Controller/AdminController.php'|file_link(0) }}">src/Controller/AdminController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/Pc/OneDrive/Bureau/Mon_projet_Couches_Lavables/mon_site_couches_lavables/templates/admin/index.html.twig'|file_link(0) }}">templates/admin/index.html.twig</a></code></li>
-    </ul>
+                            <tr>
+                                <td>
+                                    <div class="product-details">
+                                        <figure>
+                                            <img src="{{ produit.image }}" alt="{{produit.nomProduit}}">
+                                        </figure>    
+                                    </div>
+                                </td>
+                                <td> <p><a href="{{ path('show_produit', {id: produit.id}) }}">{{ produit.nomProduit }}</a></p></td>
+                                <td>{{ produit.quantite}}</td>
+                                <td>{{ produit.prix|number_format(2, '.', ',') }} €</td>
+                                <td></td>
+                            
+                                <td>
+                                    <a href="{{ path('edit_produit', {id: produit.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>    
+                                </td> 
+                                <td>
+                                    <a href="{{ path('delete_product', {id: produit.id}) }}"><i class="fa-solid fa-xmark"></i></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="admin-listing">
+                <div class="admin-list">
+                    <a href="{{ path('commandes_list') }}"><h6>Liste des commandes</h6></a>
+                    <a href="{{ path('users_list') }}"><h6>Liste des utilisateurs</h6></a>
+                </div>
+            
 
-    <a href="{{ path('new_categorie') }}">New User</a>
+                <div class="admin-commande">
+                        <a class="btn btn-success" href="{{ path('new_categorie') }}">New Categorie</a>
+                        <a class="btn btn-success" href="{{ path('new_marque') }}">New Marque</a>
+                        <a class="btn btn-success" href="{{ path('new_produit') }}">New Produit</a>
+                        <a class="btn btn-success" href="{{ path('new_sous_categorie') }}">New SousCategorie</a>
+                </div>
+            </div>
+    </div>
 </div>
 {% endblock %}

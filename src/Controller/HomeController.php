@@ -47,40 +47,23 @@ class HomeController extends AbstractController
 
 
      /**
-     * @Route("/show/{id}", name="show_produit")
-     * 
-     */
-    public function show_produit(Produit $produit, Avis $avis): Response
-    {
-        $form = $this->createForm(AvisType::class, $avis);
-        return $this->render('home/show.html.twig', [
-            'produit' => $produit,
-            'formAvis' => $form->createView(),
- 
-        ]);
-    }
-
-
-
-    /**
+     * @Route("/show/{id}", name="show_produit", requirements={"id":"\d+"})
      * @Route("/avis/new_avis", name="avis_add")
-     * @Route("/avis/avis_edit/edit/{id}", name="avis_edit", requirements={"id":"\d+"})
      */
-    public function new(ManagerRegistry $em ,Request $request, Avis $avis = null) {
-
-        if(!$avis){
-            $avis = new Avis();
-        }
-        //dd($avis);
+    public function show_produit(Request $request,ManagerRegistry $em): Response
+    {
+        $avis = new Avis();
         $idProduit = $request->get('id');
         $produit = $em->getRepository(Produit::class)->find($idProduit);
         $user = $this->security->getUser();
         $avis->setUser($user)
              ->setProduit($produit)
              ->setDateDepot(new \DateTime('now'));
+
         $form = $this->createForm(AvisType::class, $avis);
         $form->handleRequest($request);
 
+        if($form->isSubmitted() && $form->isValid()) {
 
             $avis = $form->getData();
             $em = $em->getManager(); 
@@ -88,11 +71,15 @@ class HomeController extends AbstractController
             $em->persist($avis);
             $em->flush();
 
-            $this->addFlash('success', 'Votre avis a bien été ajouté !!');
-            return $this->redirectToRoute('show_produit', [
-                "id" => $produit->getId()
-            ]);
+            $this->addFlash('success', 'Votre message a bien été ajouté !!');
+        }
 
-
+        $form = $this->createForm(AvisType::class, $avis);
+        return $this->render('home/show.html.twig', [
+            'produit' => $produit,
+            'formAvis' => $form->createView(), 
+        ]);
     }
+
+
 }

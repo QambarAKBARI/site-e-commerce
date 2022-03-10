@@ -106,7 +106,7 @@ class Produit
 
     public function getNomProduit(): ?string
     {
-        return $this->nomProduit;
+        return ucfirst($this->nomProduit);
     }
 
     public function setNomProduit(string $nomProduit): self
@@ -234,5 +234,9 @@ class Produit
         $this->status = $status;
 
         return $this;
+    }
+
+    public function getNbProduitDispo(){
+        return 3;
     }
 }

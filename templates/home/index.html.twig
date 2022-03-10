@@ -3,39 +3,48 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
-    <main class="container">
-        <div class="products">
+<div class="container">    
+    <div class="products">
         {% for produit in produits %}
-            <div class="product">
+            <div class="product-item">
                 <a href="{{ path('show_produit', {id: produit.id}) }}">
                     <img src="{{ produit.image }}" alt="{{produit.nomProduit}}">
                 </a>
-                <a href="{{ path('show_produit', {id: produit.id}) }}"> {{ produit.nomProduit }} </a>
-                <p> {{ produit.prix|number_format(2, '.', ',') }} € </p>
-                <a href="{{ path('cart_add', {id: produit.id}) }}?returnToHome=true">ajouter</a>
-                <a href="{{ path('edit_produit', {id: produit.id}) }}">éditer</a>
-                <a href="{{ path('delete_product', {id: produit.id}) }}">supprimer</a>
+                <div class="product-content">
+                
+                    <a href="{{ path('show_produit', {id: produit.id}) }}"><h4> {{ produit.nomProduit }} </h4></a>
+                    <p class="price"> {{ produit.prix|number_format(2, '.', ',') }} € </p>
+                    <button>
+                        <a class="add-to-cart-btn" href="{{ path('cart_add', {id: produit.id}) }}?returnToHome=true"><i class="fa-solid fa-cart-shopping"></i><span>add to cart</span></a>
+                    </button>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('edit_produit', {id: produit.id}) }}">éditer</a>
+                    <a href="{{ path('delete_product', {id: produit.id}) }}">supprimer</a>
+                {% endif %}
+                </div>
+                
             </div> 
         {% endfor %}
-        </div>
-        <div class="pagination">
-        {% set pages = (totalPage / limit)|round(0, 'ceil') %}
-        <button class="{{ (page == 1) ? 'disabled' : '' }}">
-            <a href="{{ (page == 1) ? '?page=' ~ (page - 1) : '' }}">
-                <i class="fa-solid fa-angle-left"></i>
-            </a>
-        </button>
-            
-            {% for item in 1..pages %}
-                <button class="{{ (page == item) ? 'active' : '' }}">
-                    <a href="?page={{ item }}">{{ item }}</a>
-                </button>
-            {% endfor %}
-        <button class="{{ (page == pages) ? 'disabled' : '' }}">
-            <a href="{{ (page < pages) ? '?page=' ~ (page + 1) : '' }}">
-                <i class="fa-solid fa-angle-right"></i>
-            </a>
-        </button>
-        </div>
-    </main>    
+    </div>
+        <ul class="pagination">
+            {% set pages = (totalPage / limit)|round(0, 'ceil') %}
+            <li class="page-item{{ (page == 1) ? 'disabled' : '' }}">
+                <a class="page-link" href="{{ (page == 1) ? '?page=' ~ (page - 1) : '' }}">
+                    <i class="fa-solid fa-angle-left"></i>
+                </a>
+            </li>
+                
+                {% for item in 1..pages %}
+                    <li class="page-item{{ (page == item) ? 'active' : '' }}">
+                        <a class="page-link" href="?page={{ item }}">{{ item }}</a>
+                    </li>
+                {% endfor %}
+            <li class="page-item{{ (page == pages) ? 'disabled' : '' }}">
+                <a class="page-link" href="{{ (page < pages) ? '?page=' ~ (page + 1) : '' }}">
+                    <i class="fa-solid fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+
+</div>
 {% endblock %}

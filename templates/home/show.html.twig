@@ -5,31 +5,41 @@
 {% block body %}
 
 <div class='container'>
-    <div class="recap-products">
-
-        <figure class="recap-product-img">
-            <img src="{{ produit.image }}">
-        </figure>  
+    <div class="show-product">
+        <div class="recap-products">
+            <figure class="recap-product-img">
+                <img src="{{ produit.image }}">
+            </figure> 
+        </div>     
         <div class="recap-product-info">  
-            <p>{{ produit.nomProduit }}</p>
-            <p>{{ produit.prix|amount }}</p>
+            <h4>{{ produit.SousCategorie }}</h4>
+            <h2>{{ produit.nomProduit }}</h2>
+            <h3>{{ produit.prix|amount }}</h3>
             <p>{{ produit.description }}</p>
+            <p>{{ produit.quantite }}</p>
+            <p>{{ produit.nbProduitDispo }}</p>
+            <button>
+                <a class="add-to-cart-btn" href="{{ path('cart_add', {id: produit.id}) }}?returnToProduct=true"><i class="fa-solid fa-cart-shopping"></i><span>add to cart</span></a>
+            </button>
         </div>
     </div>
-    <h2>Les avis</h2>
+    <hr>
+    <h4>Vos remarques sur le produit</h4>
     {% for avis in produit.avis %}
-        <p>{{ avis.texte}}</p>
-        <p>{{ avis.user.nom}}</p>
-        <p>{{ avis.note}}</p>
-        <a href="{{ path('avis_edit', {id: avis.id}) }}">Editer</a>
+        <p> <i class="fa-solid fa-user"></i>{{ avis.user.nom}}{{avis.user.prenom}}</p>
+        <p>Commenté : {{ avis.dateDepot|date('y-m-d h:i')}}</p>
+        <p>Message : {{ avis.texte}}</p>
+        <p>Note : {{ avis.note}}</p>
+    {% else %}
+        <p>Pas de avis encore pour ce produit</p>
     {% endfor %}
 
     {% if app.user %}
 
         {{ form_start(formAvis, {'action':  path('avis_add', {id: produit.id})})}}
-        {{ form_row(formAvis.texte, {'label' : 'message'})}}
-        {{ form_row(formAvis.note, {'label' : 'Votre note en nombre entier'})}}
-        <button type="submit">
+        {{ form_row(formAvis.texte, {'label' : 'Message', 'attr' : { 'placeholder' : 'Votre message'}})}}
+        {{ form_row(formAvis.note, {'label' : 'Votre note en nombre entier', 'attr' : {'placeholder' : 'Entre 1 et 5'}})}}
+        <button type="submit" class="btn-success">
            Ajouter votre commentaire
         </button>
         {{ form_end(formAvis)}}

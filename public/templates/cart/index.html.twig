@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CartController!{% endblock %}
+
+{% block body %}
+
+  
+    <div class="container">
+    {% if items|length > 0 %}
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Quantité</th>
+                    <th>Prix unitaire</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+
+                    <tr>
+                        <td>
+                            <div class="product-details">
+                                <figure>
+                                    <img src="{{ item.produit.image }}" alt="{{item.produit.nomProduit}}">
+                                </figure>    
+                                <p><a href="{{ path('show_produit', {id: item.produit.id}) }}">{{ item.produit.nomProduit }}</a></p>
+                            </div>
+                        </td>
+                        <td>
+                            <a href="{{ path('cart_decrement', {id: item.produit.id}) }}">
+                                <span class="icons icon-qtt">&minus;</span>
+                            </a>
+                            {{ item.qtt }}
+                            <a href="{{ path('cart_add', {id: item.produit.id}) }}?returnToCart=true ">
+                                <span class="icons icon-qtt">&plus;</span>
+                            </a>
+                        </td>
+                         <td>{{ item.produit.prix|number_format(2, '.', ',') }} €</td>
+                        <td>{{ (item.produit.prix * item.qtt)|number_format(2, '.', ',')}} €</td>
+                       
+                        <td>
+                            <a href="{{ path('cart_delete', {id: item.produit.id}) }}">
+                                <span class="icons">&times;</span>
+                            </a>
+                        </td> 
+                    </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3">Total:</td>
+                    <td>{{ total|number_format(2, '.', ',') }} €</td>
+                    <td>
+                        <a href="{{ path('cart_delete_all') }}"><span class="icons">&times;</span></a>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <div class="col-12 text-center text-md-right ">
+
+        </div>
+        {% if app.user %}
+            <h2>Confirmez votre commande en remplissant ce formulaire</h2>
+            {{ form_start(confirmationForm, {'action':  path('commande_confirm')})}}
+            {{ form_widget(confirmationForm) }}
+            <button type="submit" class="btn btn-success">
+                Je confirme
+            </button>
+            {{ form_end(confirmationForm) }}
+        {% else %}
+            <h2>Vous devez être connecté pour confirmer cette commande</h2>
+            <a href=" {{path('app_login')}}" class ="btn btn-success">connexion</a>ou
+            <a href="{{ path('app_register') }}">Créez un compte</a>
+        {% endif %}
+       
+    {% else %}
+        <p>Panier est vide </p>
+    {% endif %}
+    
+    </div>
+{% endblock %}

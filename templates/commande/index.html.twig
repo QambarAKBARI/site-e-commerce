@@ -25,13 +25,17 @@
             <td>{{p.dateCommande | date('d/m/y h:i')}}</td>
             <td>
                 <ul> {% for item in p.produitCommandes %}
-                <li>({{item.quantite}})x {{item.produit.nomProduit}} ({{ item.total|amount}})</li>
-            {% endfor %}</ul>
+                        <li>({{item.quantite}})x {{item.produit.nomProduit}} ({{ item.total|amount}})</li>
+                        
+                    {% endfor %}
+                </ul>
             </td>
             <td> {{p.total|amount}} </td>
         </tr>
+        {% else %}
+            <p>Vous n'avez pas de commande encore</p>
     {% endfor %}
     </tbody>
 </table>
-<a href="{{ path('user_commande_download') }}">Télécharger</a>
+
 {% endblock %}

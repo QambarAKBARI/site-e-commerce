@@ -6,18 +6,21 @@
 
   
     <div class="container">
+    <h2>Mon panier</h2>
+    <hr>
     {% if items|length > 0 %}
         <table>
-            <thead>
+            <thead class="cart-thead">
                 <tr>
-                    <th></th>
-                    <th>Quantité</th>
-                    <th>Prix unitaire</th>
+                    <th>Produit</th>
+                    <th>Nom Produit</th>
+                    <th class="hidden">Quantité</th>
+                    <th class="hidden">Prix unitaire</th>
                     <th>Total</th>
                     <th></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="cart-body">
                 {% for item in items %}
 
                     <tr>
@@ -25,11 +28,22 @@
                             <div class="product-details">
                                 <figure>
                                     <img src="{{ item.produit.image }}" alt="{{item.produit.nomProduit}}">
-                                </figure>    
-                                <p><a href="{{ path('show_produit', {id: item.produit.id}) }}">{{ item.produit.nomProduit }}</a></p>
+                                </figure> 
                             </div>
                         </td>
                         <td>
+                            <p><a href="{{ path('show_produit', {id: item.produit.id}) }}">{{ item.produit.nomProduit }}</a></p>
+                            <div class="reveal">   
+                                <a href="{{ path('cart_decrement', {id: item.produit.id}) }}">
+                                    <span class="icons icon-qtt">&minus;</span>
+                                </a>
+                                {{ item.qtt }}
+                                <a href="{{ path('cart_add', {id: item.produit.id}) }}?returnToCart=true ">
+                                    <span class="icons icon-qtt">&plus;</span>
+                                </a>
+                            </div>
+                        </td>
+                        <td class="hidden">
                             <a href="{{ path('cart_decrement', {id: item.produit.id}) }}">
                                 <span class="icons icon-qtt">&minus;</span>
                             </a>
@@ -38,8 +52,8 @@
                                 <span class="icons icon-qtt">&plus;</span>
                             </a>
                         </td>
-                         <td>{{ item.produit.prix|number_format(2, '.', ',') }} €</td>
-                        <td>{{ (item.produit.prix * item.qtt)|number_format(2, '.', ',')}} €</td>
+                         <td class="hidden">{{ item.produit.prix|amount }} </td>
+                        <td>{{ (item.produit.prix * item.qtt)|amount}} </td>
                        
                         <td>
                             <a href="{{ path('cart_delete', {id: item.produit.id}) }}">
@@ -60,17 +74,26 @@
             </tfoot>
         </table>
 
-        <div class="col-12 text-center text-md-right ">
+       <!-- Button trigger modal -->
+<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  Commander, {{ total|amount}}
+</button>
 
-            <a href="#" class="btn btn-block btn-success mb-5">Valider mon Panier</a>
-
-        </div>
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Paiement</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
         {% if app.user %}
-            <h2>Confirmez votre commande en remplissant ce formulaire</h2>
+            <h4>Veuillez nous indiquer votre adresse de Livraison</h4>
             {{ form_start(confirmationForm, {'action':  path('commande_confirm')})}}
             {{ form_widget(confirmationForm) }}
             <button type="submit" class="btn btn-success">
-                Je confirme
+                Je commande
             </button>
             {{ form_end(confirmationForm) }}
         {% else %}
@@ -78,6 +101,17 @@
             <a href=" {{path('app_login')}}" class ="btn btn-success">connexion</a>ou
             <a href="{{ path('app_register') }}">Créez un compte</a>
         {% endif %}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+    </div>
+
        
     {% else %}
         <p>Panier est vide </p>

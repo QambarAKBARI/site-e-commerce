@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+
+{% block body %}
+    <p>{{ user.nom }}</p>
+    <p>{{ user.prenom }}</p>
+    <a href="{{ path('purchase_index') }}">Mes commandes</a>
+    <a href="{{ path('avis_index') }}">Mes avis</a>
+{% endblock %}

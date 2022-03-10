@@ -1,16 +1,53 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,300&display=swap');
 *{
     box-sizing: border-box;
-    font-family: 'Lato', sans-serif;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
 }
+
 a{
     text-decoration: none;
 }
-
+img{
+    width: 100%;
+    height: auto;
+}
 .container{
     max-width: 1200px;
     margin: auto;
 }
+
+/* bouton CSS */
+.btn-success {
+    background-color: #13aa52;
+    border: 1px solid #13aa52;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, .1) 0 2px 4px 0;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 10px 25px;
+    text-align: center;
+    transform: translateY(0);
+    transition: transform 150ms, box-shadow 150ms;
+
+  }
+  
+  .btn-success:hover {
+    box-shadow: rgba(0, 0, 0, .15) 0 3px 9px 0;
+    transform: translateY(-2px);
+  }
+  
+  @media (min-width: 768px) {
+    .btn-success {
+      padding: 10px 30px;
+    }
+  }
+
+/* HomePage Nav Style */
 .nav{
     width: 100%;
 }
@@ -23,32 +60,77 @@ a{
     font-size: large;
     color: black;
 }
+
+/* cart Style */
+
+.product-details figure {
+    width: 110px;
+    height: 110px;
+}
+
+/* HomePage Products Style */
+
 .products{
     display: grid;
-    grid-template-columns: repeat(4, 290px);
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
     grid-gap: 10px;
    
+}
+.product-item{
+    border: 1px solid #eee;
+	margin-bottom: 30px;
+    width: 100%;
+}
+.product-item .product-content {
+	padding: 30px;
+	position: relative;
+}
 
+.product-item .product-content h4 {
+	font-size: 17px;
+	color: #1a6692;
+	margin-bottom: 20px;
 }
-.product{
-    border: 1px solid brown;
-    width: 100%;
+
+.product-item .product-content p {
+	position: absolute;
+	top: 30px;
+	right: 30px;
+	font-size: 18px;
+	color: #121212;
 }
-img{
+
+.product-item .product-content a, .recap-product-info a {
+    color: white;
+}
+
+.product-item .product-content span {
+    margin-left: 0.4em;
+}
+
+.product-item .product-content button, .recap-product-info button {
+    border: none;
+    outline: 0;
+    padding: 12px;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
     width: 100%;
+    font-size: 18px;
+  }
+
+
+
+
+.price{
+    color: grey;
+    font-size: 22px;
 }
 
 table{
     width: 100%;
     text-align: center;
-}
-figure{
-    height: 110px;
-    width: 110px;
-}
-
-.product-details, .recap-products{
-    display: flex;
+    margin-bottom: 80px;
 }
 
 .icons{
@@ -56,16 +138,16 @@ figure{
     color: brown;
     font-size: 1.5em;
     font-weight: 900;
+    border: 1px solid wheat;
+    background-color: #f8f9fd;
+    padding: 0 0.3em;
 }
 .icons.icon-qtt{
     margin: 0 0.5em;
 }
 
 
-.recap-product-img{
-    width: 510px;
-    height: 314px;
-}
+
 label, input{
     padding: 1em;
     width: 50%;
@@ -73,9 +155,94 @@ label, input{
 ul {
     list-style-type: none;
   }
-button.disabled{
-    background-color: brown;
+
+
+
+/* Admin Style */
+
+.admin-control{
+    display: flex;
 }
-button.active{
-    background-color: green;
+
+.admin-products{
+    flex: 4;
+}
+.admin-listing{
+    flex: 1;
+}
+.admin-listing{
+    padding: 1em;
+}
+
+header{
+    height: 80px;
+    padding: 1em;
+}
+
+/* showProduct Style */
+
+
+
+.recap-products, .perssonel-info, .show-product{
+    display: flex;
+    justify-content:space-evenly;
+}
+.recap-products{
+    flex: 1;
+    margin-bottom: 50px;
+}
+.recap-product-info{
+    margin-left: 1em;
+    flex: 1;
+}
+/* cartTable Style */
+
+.cart-thead{
+    background: #99b19c;
+    color: #eee;
+    height: 50px;
+}
+
+table tbody tr{
+    margin-bottom: 10px;
+}
+
+table tbody th, table tbody td, table tfoot td{
+    border: none; 
+    padding: 30px;
+    font-size: 14px;
+    background: #fff;
+    border-bottom: 4px solid #f8f9fd;
+    vertical-align: middle;
+}
+
+.reveal{
+    display: none;
+}
+@media (max-width: 900px) {
+    .hidden{
+        display: none;
+    }
+    .reveal{
+        display: initial;
+    }
+    .cart-body tr td, table tfoot td{
+        padding:0;
+    }
+}
+
+@media (max-width: 450px) {
+
+    .cart-body tr td a{
+        display: block;
+    }
+}
+
+
+/* Stripe Style */
+
+#card-element{
+    padding: 1.5em;
+    background-color: aliceblue;
+    margin: 1em 0;
 }
