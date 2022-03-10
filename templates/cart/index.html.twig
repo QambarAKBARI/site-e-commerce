@@ -74,6 +74,7 @@
             </tfoot>
         </table>
 
+<<<<<<< HEAD
        <!-- Button trigger modal -->
 <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
   Commander, {{ total|amount}}
@@ -88,6 +89,11 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+=======
+        <div class="col-12 text-center text-md-right ">
+
+        </div>
+>>>>>>> 0420a25626decad11d0f73f9b9d895684c698c86
         {% if app.user %}
             <h4>Veuillez nous indiquer votre adresse de Livraison</h4>
             {{ form_start(confirmationForm, {'action':  path('commande_confirm')})}}

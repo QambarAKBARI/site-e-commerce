@@ -236,6 +236,7 @@ class Produit
         return $this;
     }
 
+<<<<<<< HEAD
     public function isProductAvailable(){
         if($this->quantite > 0){
             $this->status = "Available";
@@ -245,4 +246,9 @@ class Produit
     }
 
 
+=======
+    public function getNbProduitDispo(){
+        return 3;
+    }
+>>>>>>> 0420a25626decad11d0f73f9b9d895684c698c86
 }

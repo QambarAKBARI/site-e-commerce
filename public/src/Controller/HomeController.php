@@ -28,10 +28,17 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home")
      */
+<<<<<<< HEAD
     public function index(ProduitRepository $produits, Request $request, CartService $cartService): Response
     {
 
         $limit = 9;
+=======
+    public function index(ProduitRepository $produits, SessionInterface $session, Request $request, CartService $cartService): Response
+    {
+
+        $limit = 8;
+>>>>>>> 0420a25626decad11d0f73f9b9d895684c698c86
         $page = (int)$request->query->get("page", 1);
         $total = $produits->getTotalProducts();
 
@@ -55,7 +62,10 @@ class HomeController extends AbstractController
         $avis = new Avis();
         $idProduit = $request->get('id');
         $produit = $em->getRepository(Produit::class)->find($idProduit);
+<<<<<<< HEAD
         dd($produit);
+=======
+>>>>>>> 0420a25626decad11d0f73f9b9d895684c698c86
         $user = $this->security->getUser();
         $avis->setUser($user)
              ->setProduit($produit)

@@ -6,19 +6,29 @@
 
 <div class='container'>
     <div class="recap-products">
+<<<<<<< HEAD
         <div class="recap-img">
             <figure>
                 <img src="{{ produit.image }}">
             </figure> 
         </div> 
+=======
+        <figure class="recap-product-img">
+            <img src="{{ produit.image }}">
+        </figure>  
+>>>>>>> 0420a25626decad11d0f73f9b9d895684c698c86
         <div class="recap-product-info">  
             <h4>{{ produit.SousCategorie }}</h4>
             <h2>{{ produit.nomProduit }}</h2>
             <h3>{{ produit.prix|amount }}</h3>
             <p>{{ produit.description }}</p>
             <p>{{ produit.quantite }}</p>
+<<<<<<< HEAD
             <p>{{ produit.status }}</p>
             <p>{{ produit.nbProduitCommanderrrr }}</p>
+=======
+            <p>{{ produit.nbProduitDispo }}</p>
+>>>>>>> 0420a25626decad11d0f73f9b9d895684c698c86
             <button>
                 <a class="add-to-cart-btn" href="{{ path('cart_add', {id: produit.id}) }}?returnToProduct=true"><i class="fa-solid fa-cart-shopping"></i><span>add to cart</span></a>
             </button>
@@ -47,7 +57,11 @@
         
 
     {% else %}
+<<<<<<< HEAD
         <h2>Vous devez être connecté pour pouvoir commenter !!</h2>
+=======
+        <h2>Vous devez être connecté pour pouvoir commenter</h2>
+>>>>>>> 0420a25626decad11d0f73f9b9d895684c698c86
         <a href=" {{path('app_login')}}" class ="btn btn-success">Se connecter</a> ou
         <a href="{{ path('app_register') }}">Créez un compte</a>
     {% endif %}
