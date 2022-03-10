@@ -9,7 +9,6 @@
         
             <div class="admin-products">
                 <table>
-<<<<<<< HEAD
                     <thead class="cart-thead">
                         <tr>
                             <th>Produit</th>
@@ -22,18 +21,6 @@
                         </tr>
                     </thead>
                     <tbody class="cart-tbody">
-=======
-                    <thead>
-                        <tr>
-                            <th>Produit</th>
-                            <th>Quantité</th>
-                            <th>Prix unitaire</th>
-                            <th>Quantité Restant</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
->>>>>>> 0420a25626decad11d0f73f9b9d895684c698c86
                         {% for produit in produits %}
 
                             <tr>
@@ -42,32 +29,19 @@
                                         <figure>
                                             <img src="{{ produit.image }}" alt="{{produit.nomProduit}}">
                                         </figure>    
-<<<<<<< HEAD
                                     </div>
                                 </td>
                                 <td> <p><a href="{{ path('show_produit', {id: produit.id}) }}">{{ produit.nomProduit }}</a></p></td>
-=======
-                                        <p><a href="{{ path('show_produit', {id: produit.id}) }}">{{ produit.nomProduit }}</a></p>
-                                    </div>
-                                </td>
->>>>>>> 0420a25626decad11d0f73f9b9d895684c698c86
                                 <td>{{ produit.quantite}}</td>
                                 <td>{{ produit.prix|number_format(2, '.', ',') }} €</td>
                                 <td></td>
                             
                                 <td>
-<<<<<<< HEAD
                                     <a href="{{ path('edit_produit', {id: produit.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>    
                                 </td> 
                                 <td>
                                     <a href="{{ path('delete_product', {id: produit.id}) }}"><i class="fa-solid fa-xmark"></i></a>
                                 </td>
-=======
-                                    <a href="{{ path('cart_delete', {id: produit.id}) }}">
-                                        <span class="icons">&times;</span>
-                                    </a>
-                                </td> 
->>>>>>> 0420a25626decad11d0f73f9b9d895684c698c86
                             </tr>
                         {% endfor %}
                     </tbody>
@@ -81,17 +55,10 @@
             
 
                 <div class="admin-commande">
-<<<<<<< HEAD
                         <a class="btn btn-success" href="{{ path('new_categorie') }}">New Categorie</a>
                         <a class="btn btn-success" href="{{ path('new_marque') }}">New Marque</a>
                         <a class="btn btn-success" href="{{ path('new_produit') }}">New Produit</a>
                         <a class="btn btn-success" href="{{ path('new_sous_categorie') }}">New SousCategorie</a>
-=======
-                        <a class="btn-new" href="{{ path('new_categorie') }}">New Categorie</a>
-                        <a class="btn-new" href="{{ path('new_marque') }}">New Marque</a>
-                        <a class="btn-new" href="{{ path('new_produit') }}">New Produit</a>
-                        <a class="btn-new" href="{{ path('new_sous_categorie') }}">New SousCategorie</a>
->>>>>>> 0420a25626decad11d0f73f9b9d895684c698c86
                 </div>
             </div>
     </div>

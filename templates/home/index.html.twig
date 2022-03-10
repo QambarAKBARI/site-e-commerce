@@ -26,7 +26,6 @@
             </div> 
         {% endfor %}
     </div>
-<<<<<<< HEAD
         <ul class="pagination">
             {% set pages = (totalPage / limit)|round(0, 'ceil') %}
             <li class="page-item{{ (page == 1) ? 'disabled' : '' }}">
@@ -46,27 +45,6 @@
                 </a>
             </li>
         </ul>
-=======
-        <div class="pagination">
-            {% set pages = (totalPage / limit)|round(0, 'ceil') %}
-            <button class="{{ (page == 1) ? 'disabled' : '' }}">
-                <a href="{{ (page == 1) ? '?page=' ~ (page - 1) : '' }}">
-                    <i class="fa-solid fa-angle-left"></i>
-                </a>
-            </button>
-                
-                {% for item in 1..pages %}
-                    <button class="{{ (page == item) ? 'active' : '' }}">
-                        <a class="btn-pagination" href="?page={{ item }}">{{ item }}</a>
-                    </button>
-                {% endfor %}
-            <button class="{{ (page == pages) ? 'disabled' : '' }}">
-                <a href="{{ (page < pages) ? '?page=' ~ (page + 1) : '' }}">
-                    <i class="fa-solid fa-angle-right"></i>
-                </a>
-            </button>
-        </div>
->>>>>>> 0420a25626decad11d0f73f9b9d895684c698c86
 
 </div>
 {% endblock %}
