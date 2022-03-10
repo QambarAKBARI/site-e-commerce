@@ -18,71 +18,7 @@ img{
     margin: auto;
 }
 
-<<<<<<< HEAD
 /* bouton CSS */
-=======
-button{
-    min-width: 50px;
-}
-
-.__PrivateStripeElement-input{
-    padding: 1.5em;
-}
-
-/* CSS */
-.btn-new {
-    display: block;
-  align-items: center;
-  background-color: #06f;
-  border: 2px solid #06f;
-  box-sizing: border-box;
-  color: #fff;
-  cursor: pointer;
-  display: inline-flex;
-  fill: #000;
-  font-family: Inter,sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  height: 48px;
-  justify-content: center;
-  letter-spacing: -.8px;
-  line-height: 24px;
-  min-width: 140px;
-  outline: 0;
-  padding: 0 17px;
-  text-align: center;
-  text-decoration: none;
-  transition: all .3s;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-}
-
-.button-58:focus {
-  color: #171e29;
-}
-
-.button-58:hover {
-  background-color: #3385ff;
-  border-color: #3385ff;
-  fill: #06f;
-}
-
-.button-58:active {
-  background-color: #3385ff;
-  border-color: #3385ff;
-  fill: #06f;
-}
-
-@media (min-width: 768px) {
-  .button-58 {
-    min-width: 170px;
-  }
-}
-
-
-/* CSS */
->>>>>>> 0420a25626decad11d0f73f9b9d895684c698c86
 .btn-success {
     background-color: #13aa52;
     border: 1px solid #13aa52;
@@ -110,12 +46,8 @@ button{
       padding: 10px 30px;
     }
   }
-<<<<<<< HEAD
 
 /* HomePage Nav Style */
-=======
-/* HomePage Style */
->>>>>>> 0420a25626decad11d0f73f9b9d895684c698c86
 .nav{
     width: 100%;
 }
@@ -183,26 +115,12 @@ button{
     background-color: #000;
     text-align: center;
     cursor: pointer;
-<<<<<<< HEAD
-=======
-    width: 100%;
-    font-size: 18px;
-  }
-
-
-img{
->>>>>>> 0420a25626decad11d0f73f9b9d895684c698c86
     width: 100%;
     font-size: 18px;
   }
 
 
 
-
-.price{
-    color: grey;
-    font-size: 22px;
-}
 
 .price{
     color: grey;
@@ -212,10 +130,7 @@ img{
 table{
     width: 100%;
     text-align: center;
-<<<<<<< HEAD
     margin-bottom: 80px;
-=======
->>>>>>> 0420a25626decad11d0f73f9b9d895684c698c86
 }
 
 .icons{
@@ -291,7 +206,6 @@ header{
 table tbody tr{
     margin-bottom: 10px;
 }
-<<<<<<< HEAD
 
 table tbody th, table tbody td, table tfoot td{
     border: none; 
@@ -331,50 +245,4 @@ table tbody th, table tbody td, table tfoot td{
     padding: 1.5em;
     background-color: aliceblue;
     margin: 1em 0;
-=======
-button.active{
-    background-color: #13aa52;
-}
-
-
-
-/* Admin Style */
-
-.admin-control{
-    display: flex;
-}
-
-.admin-products{
-    flex: 3;
-}
-.admin-listing{
-    flex: 1;
-}
-button{
-    display: block;
-}
-
-nav{
-    
-}
-
-header{
-    height: 80px;
-    padding: 1em;
-}
-
-/* showProduct Style */
-
-figure{
-    height: 110px;
-    width: 110px;
-}
-
-.product-details, .recap-products, .perssonel-info{
-    display: flex;
-    justify-content:space-evenly;
-}
-.recap-products{
-    margin-bottom: 50px;
->>>>>>> 0420a25626decad11d0f73f9b9d895684c698c86
 }
