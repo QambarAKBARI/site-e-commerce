@@ -32,6 +32,7 @@ class SearchType extends AbstractType
                 'multiple' => true
             ])
             ->add('min', NumberType::class, [
+                'html5' => true,
                 'label' => false,
                 'required' => false,
                 'attr' => [
@@ -39,6 +40,7 @@ class SearchType extends AbstractType
                 ]
             ])
             ->add('max', NumberType::class, [
+                'html5' => true,
                 'label' => false,
                 'required' => false,
                 'attr' => [

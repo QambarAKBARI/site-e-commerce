@@ -12,17 +12,15 @@
             </figure> 
         </div>     
         <div class="recap-product-info">  
+            <p>{{ produit.marque }}</p>
             <h4>{{ produit.SousCategorie }}</h4>
             <h2>{{ produit.nomProduit }}</h2>
             <h3>{{ produit.prix|amount }}</h3>
             <p>{{ produit.description }}</p>
-            <p>{{ produit.status }}</p>
-
             {% for item in items %}
                 
-                {% if item.produit.id == produit.id %}
+                    {% if item.produit.id == produit.id %}
                 
-                    {% if produit.status == "Available" %}
                         <div class="">   
                             <a href="{{ path('cart_decrement', {id: produit.id}) }}">
                                 <span class="icons icon-qtt">&minus;</span>
@@ -32,22 +30,16 @@
                                 <span class="icons icon-qtt">&plus;</span>
                             </a>
                         </div>
+
+                    {% endif %}
+
+           {% endfor %}     
+                    
                         <button>
                             <a class="add-to-cart-btn" href="{{ path('cart_add', {id: produit.id}) }}?returnToProduct=true">
                                 <i class="fa-solid fa-cart-shopping"></i><span>add to cart</span>
                             </a>   
                         </button> 
-                    {% else %}
-                        <button>
-                            <a class="add-to-cart-btn">
-                                <span>en rupture de stock</span>
-                            </a>
-                        </button>
-                    {% endif %}
-                {% endif %}
-           {% endfor %}     
-                    
-                
             
         </div>
     </div>

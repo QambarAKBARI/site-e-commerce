@@ -44,18 +44,10 @@ class CartController extends AbstractController
             $qttInStock = $produit->getQuantite();
             $qttInCart = $request->query->get('qtt');
             
-            
-            if($qttInCart <= $qttInStock && $qttInCart > 0){
 
-                $this->addFlash('success', "le produit a bien été ajouté au panier");
-                $this->cartService->add($id);
-            }else{
-                $product->setStatus("En rupture");
-                $em->persist($product);
-                $em->flush();
-                $this->addFlash('danger', "le produit est en rupture de stock");
-                
-            }
+            $this->addFlash('success', "le produit a bien été ajouté au panier");
+            $this->cartService->add($id);
+            
         }else{
             $this->addFlash('danger', "le produit $id n'éxiste pas");
         }

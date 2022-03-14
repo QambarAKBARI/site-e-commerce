@@ -11,7 +11,7 @@ class SearchService {
     public int $page = 1;
 
     public string $q;
-    public Marque $marques;
+    public $marques = [];
     public int $max;
     public int $min;
 

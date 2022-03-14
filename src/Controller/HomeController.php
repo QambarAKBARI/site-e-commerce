@@ -36,8 +36,11 @@ class HomeController extends AbstractController
         $data->page = $request->get('page', 1);
         $form = $this->createForm(SearchType::class, $data);
         $form->handleRequest($request);
-        $produits = $prodRepo->findSearch($data);
 
+        if($form->isSubmitted() && $form->isValid()){
+            $produits = $prodRepo->findSearch($data);
+        }
+        $produits = $prodRepo->findSearch($data);
 
         return $this->render('home/index.html.twig', [
             'produits' => $produits,

@@ -37,7 +37,7 @@ class ProduitRepository extends ServiceEntityRepository
 
         $query = $this
             ->createQueryBuilder('p')
-            ->select('m', 'p')
+            ->select('p', 'm')
             ->join('p.marque', 'm');
 
         if (!empty($search->q)) {
@@ -61,7 +61,7 @@ class ProduitRepository extends ServiceEntityRepository
 
         if (!empty($search->marques)) {
             $query = $query
-                ->andWhere('c.id IN (:marque)')
+                ->andWhere('m.id IN (:marque)')
                 ->setParameter('marque', $search->marques);
         }
 
@@ -73,7 +73,18 @@ class ProduitRepository extends ServiceEntityRepository
     }
 
 
-
+    /**
+     * Récupère les produits en lien avec une recherche
+     * @return PaginationInterface
+     */
+    public function findAllProducts(): PaginationInterface
+    {
+        $query = $this->findAll();
+        return $this->paginator->paginate(
+            $query,
+            9
+        );
+    }
 
     // /**
     //  * @return Produit[] Returns an array of Produit objects
