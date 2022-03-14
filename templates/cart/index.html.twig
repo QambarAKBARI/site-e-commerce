@@ -38,7 +38,7 @@
                                     <span class="icons icon-qtt">&minus;</span>
                                 </a>
                                 {{ item.qtt }}
-                                <a href="{{ path('cart_add', {id: item.produit.id}) }}?returnToCart=true ">
+                                <a href="{{ path('cart_add', {id: item.produit.id})}}?returnToCart=true ">
                                     <span class="icons icon-qtt">&plus;</span>
                                 </a>
                             </div>
@@ -48,7 +48,7 @@
                                 <span class="icons icon-qtt">&minus;</span>
                             </a>
                             {{ item.qtt }}
-                            <a href="{{ path('cart_add', {id: item.produit.id}) }}?returnToCart=true ">
+                            <a href="{{ path('cart_add', {id: item.produit.id}) }}?returnToCart=true&qtt={{item.qtt}}">
                                 <span class="icons icon-qtt">&plus;</span>
                             </a>
                         </td>

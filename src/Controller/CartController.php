@@ -2,13 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\Produit;
 use App\Form\CommandeType;
 use App\Service\Cart\CartService;
 use App\Repository\ProduitRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CartController extends AbstractController
 {
@@ -33,16 +35,31 @@ class CartController extends AbstractController
     /**
      * @Route("/cart/add/{id}", name="cart_add", requirements={"id":"\d+"})
      */
-    public function add($id, Request $request)
+    public function add($id, Request $request, Produit $product, EntityManagerInterface $em)
     {
 
         $produit = $this->produitRepository->find($id);
-        if (!$produit) {
-            throw $this->createNotFoundException("le produit $id n'éxiste pas");
+        if($produit) {
+        
+            $qttInStock = $produit->getQuantite();
+            $qttInCart = $request->query->get('qtt');
+            
+            
+            if($qttInCart <= $qttInStock && $qttInCart > 0){
+
+                $this->addFlash('success', "le produit a bien été ajouté au panier");
+                $this->cartService->add($id);
+            }else{
+                $product->setStatus("En rupture");
+                $em->persist($product);
+                $em->flush();
+                $this->addFlash('danger', "le produit est en rupture de stock");
+                
+            }
+        }else{
+            $this->addFlash('danger', "le produit $id n'éxiste pas");
         }
 
-        $this->addFlash('success', "le produit a bien été ajouté au panier");
-        $this->cartService->add($id);
         if ($request->query->get('returnToCart')) {
             return $this->redirectToRoute('cart_show');
         }

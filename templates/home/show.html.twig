@@ -16,11 +16,39 @@
             <h2>{{ produit.nomProduit }}</h2>
             <h3>{{ produit.prix|amount }}</h3>
             <p>{{ produit.description }}</p>
-            <p>{{ produit.quantite }}</p>
-            <p>{{ produit.nbProduitDispo }}</p>
-            <button>
-                <a class="add-to-cart-btn" href="{{ path('cart_add', {id: produit.id}) }}?returnToProduct=true"><i class="fa-solid fa-cart-shopping"></i><span>add to cart</span></a>
-            </button>
+            <p>{{ produit.status }}</p>
+
+            {% for item in items %}
+                
+                {% if item.produit.id == produit.id %}
+                
+                    {% if produit.status == "Available" %}
+                        <div class="">   
+                            <a href="{{ path('cart_decrement', {id: produit.id}) }}">
+                                <span class="icons icon-qtt">&minus;</span>
+                            </a>
+                            {{ item.qtt }}
+                            <a href="{{ path('cart_add', {id: produit.id})}}?returnToProduct=true&qtt={{item.qtt}}">
+                                <span class="icons icon-qtt">&plus;</span>
+                            </a>
+                        </div>
+                        <button>
+                            <a class="add-to-cart-btn" href="{{ path('cart_add', {id: produit.id}) }}?returnToProduct=true">
+                                <i class="fa-solid fa-cart-shopping"></i><span>add to cart</span>
+                            </a>   
+                        </button> 
+                    {% else %}
+                        <button>
+                            <a class="add-to-cart-btn">
+                                <span>en rupture de stock</span>
+                            </a>
+                        </button>
+                    {% endif %}
+                {% endif %}
+           {% endfor %}     
+                    
+                
+            
         </div>
     </div>
     <hr>
@@ -50,6 +78,14 @@
         <a href=" {{path('app_login')}}" class ="btn btn-success">Se connecter</a> ou
         <a href="{{ path('app_register') }}">Créez un compte</a>
     {% endif %}
-    
+     
 </div>    
+{% endblock %}
+{% block javascripts %}
+  <script>
+ 
+
+
+
+  </script>
 {% endblock %}

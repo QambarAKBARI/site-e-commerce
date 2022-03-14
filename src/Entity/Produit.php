@@ -67,7 +67,7 @@ class Produit
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $status;
+    private $status = "Available";
 
     public function __construct()
     {
@@ -236,7 +236,30 @@ class Produit
         return $this;
     }
 
+    public function getNbProduitCommande(){
+
+        $totalQtt = 0;
+        foreach ($this->produitCommandes as $item) {
+            $totalQtt += $item->getQuantite();
+        }
+        return $totalQtt;
+    }
+
     public function getNbProduitDispo(){
-        return 3;
+        return $this->getNbProduitCommande() - $this->quantite; 
+    }
+
+    public function isProductAvailable(){
+        if($this->getNbProduitCommande() > 0){
+            $this->status = "Available";
+        }else{
+            $this->status = "En rupture";
+        }
+        return $this->status;
+    }
+
+    public function __toString()
+    {
+        return $this->nomProduit;
     }
 }

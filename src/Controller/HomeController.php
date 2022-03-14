@@ -5,13 +5,14 @@ namespace App\Controller;
 use App\Entity\Avis;
 use App\Form\AvisType;
 use App\Entity\Produit;
+use App\Form\SearchType;
 use App\Repository\ProduitRepository;
 use App\Service\Cart\CartService;
+use App\Service\Search\SearchService;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Security;
 
@@ -28,20 +29,20 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function index(ProduitRepository $produits, SessionInterface $session, Request $request, CartService $cartService): Response
+    public function index(ProduitRepository $prodRepo, Request $request, CartService $cartService): Response
     {
 
-        $limit = 8;
-        $page = (int)$request->query->get("page", 1);
-        $total = $produits->getTotalProducts();
+        $data = new SearchService();
+        $data->page = $request->get('page', 1);
+        $form = $this->createForm(SearchType::class, $data);
+        $form->handleRequest($request);
+        $produits = $prodRepo->findSearch($data);
 
-        //$panier = [];
+
         return $this->render('home/index.html.twig', [
-            'produits' => $produits->getPaginatedProducts($page, $limit),
-            'totalPage'   => $total,
-            'limit' => $limit,
-            'page' => $page,
+            'produits' => $produits,
             'cartService' => $cartService,
+            'formSearch'  => $form->createView()
         ]);
     }
 
@@ -50,7 +51,7 @@ class HomeController extends AbstractController
      * @Route("/show/{id}", name="show_produit", requirements={"id":"\d+"})
      * @Route("/avis/new_avis", name="avis_add")
      */
-    public function show_produit(Request $request,ManagerRegistry $em): Response
+    public function show_produit(Request $request,ManagerRegistry $em, CartService $cartService): Response
     {
         $avis = new Avis();
         $idProduit = $request->get('id');
@@ -75,8 +76,10 @@ class HomeController extends AbstractController
         }
 
         $form = $this->createForm(AvisType::class, $avis);
+        $detailDeCart = $cartService->getDetailCartItem();
         return $this->render('home/show.html.twig', [
             'produit' => $produit,
+            'items' => $detailDeCart,
             'formAvis' => $form->createView(), 
         ]);
     }
