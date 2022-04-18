@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+
+{% block body %}
+
+<h3>List des détails des commandes efféctués par {{ user.nom}} {{ user.prenom}} :</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Numéro de commande </th>
+            <th>Paiement </th>
+            <th>Adresse</th>
+            <th>Date de commande</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for commande in user.commandes %}
+        <tr>
+            <td> {{ commande.id}}</td>
+            <td> {{ commande.status}}</td>
+            <td>{{commande.adresseLivraison}} <br> {{commande.cpLivraison}}, {{commande.villeLivraison}} </td>
+            <td>{{commande.dateCommande | date('d/m/y h:i')}}</td>
+            <td> {{ commande.total|amount}} </td>
+        </tr>
+
+    {% else %}
+        <p>Cet utilisateur n'a pas de commande encore</p>
+        
+    {% endfor %}
+{% endblock %}

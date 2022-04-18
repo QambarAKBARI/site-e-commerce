@@ -40,7 +40,7 @@ class CartService
         } else {
             $cart[$id] = 1;
         }
-        $this->session->set('cart', $cart);
+        $this->saveCart($cart);
     }
 
     public function decrement(int  $id)

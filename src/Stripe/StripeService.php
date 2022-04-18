@@ -7,13 +7,11 @@ use App\Entity\Commande;
 class StripeService
 
 {
-    
     protected $secretKey;
     protected $publickey;
     
     public function __construct(string $secretKey, string $publicKey)
     {
-        
         $this->secretKey = $secretKey;
         $this->publickey = $publicKey;
     }
@@ -22,7 +20,7 @@ class StripeService
     {
         return $this->publickey;
     }
-
+    
     public function getPaymentIntent(Commande $purchase)
     {
         \Stripe\Stripe::setApiKey($this->secretKey);

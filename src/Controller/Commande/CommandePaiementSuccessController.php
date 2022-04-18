@@ -2,12 +2,10 @@
 
 namespace App\Controller\Commande;
 
-use Knp\Snappy\Pdf;
-use Twig\Environment;
+
 use App\Entity\Commande;
 use App\Service\Cart\CartService;
 use App\Repository\CommandeRepository;
-use App\Service\Pdf\PdfService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
@@ -46,6 +44,6 @@ class CommandePaiementSuccessController extends AbstractController
         $mailer->send($email);
 
         $this->addFlash('success', "la commande a été payé, vous receverez un mail dans les plus brefs délais lorsque la commande sera traité");
-        return $this->redirectToRoute('home');
+        return $this->redirectToRoute('purchase_index');
     }
 }

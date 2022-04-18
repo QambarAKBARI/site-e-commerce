@@ -28,6 +28,7 @@ class CommandePaiementController extends AbstractController
         return $this->render('commande/paiement.html.twig', [
 
             'clientSecret' => $intent->client_secret,
+            'url' => $intent,
             'purchase' => $purchase,
             'stripePublicKey'=> $stripeService->getPublicKey()
 

@@ -3,10 +3,40 @@
 {% block title %}Hello AvisController!{% endblock %}
 
 {% block body %}
-    {% for commande in commandes %}
-        <p>{{ commande.id }}</p>
-        <p>{{ commande.dateCommande|date('d/m/y h:i') }}</p>
-    {% else %}
-        <p>Vous n'avez pas de commande encore</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Numéro de commande </th>
+            <th>Adresse</th>
+            <th>Date de commande</th>
+            <th>produit</th>
+            <th>Acheteur</th>
+            <th>Status</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for c in commandes %}    
+        <tr>
+            <td> {{c.id}}</td>
+            <td>{{c.adresseLivraison}} <br> {{c.cpLivraison}}, {{c.villeLivraison}} </td>
+            <td>{{c.dateCommande | date('d/m/y h:i')}}</td>
+            <td>
+                <ul> {% for item in c.produitCommandes %}
+                        <li>({{item.quantite}})x {{item.produit.nomProduit}} ({{ item.total|amount}})</li>
+                        
+                    {% endfor %}
+                </ul>
+            </td>
+            <td> {{c.user}} </td>
+            <td> {{c.status}} </td>
+            <td> {{c.total|amount}} </td>
+        </tr>
+        {% else %}
+            <p>pas de commande encore</p>
     {% endfor %}
+    </tbody>
+</table>
+
 {% endblock %}

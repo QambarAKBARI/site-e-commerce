@@ -16,35 +16,32 @@
             <h4>{{ produit.SousCategorie }}</h4>
             <h2>{{ produit.nomProduit }}</h2>
             <h3>{{ produit.prix|amount }}</h3>
-            <p>{{ produit.description }}</p>
             {% for item in items %}
-                
+
                     {% if item.produit.id == produit.id %}
-                
-                        <div class="">   
-                            <a href="{{ path('cart_decrement', {id: produit.id}) }}">
+                        <div class="btn-show-product">   
+                            <a href="{{ path('cart_decrement', {id: produit.id}) }}?returnToProduct=true">
                                 <span class="icons icon-qtt">&minus;</span>
                             </a>
                             {{ item.qtt }}
-                            <a href="{{ path('cart_add', {id: produit.id})}}?returnToProduct=true&qtt={{item.qtt}}">
+                            <a href="{{ path('cart_add', {id: produit.id})}}?returnToProduct=true">
                                 <span class="icons icon-qtt">&plus;</span>
                             </a>
                         </div>
-
                     {% endif %}
 
            {% endfor %}     
-                    
                         <button>
-                            <a class="add-to-cart-btn" href="{{ path('cart_add', {id: produit.id}) }}?returnToProduct=true">
+                            <a class="" href="{{ path('cart_add', {id: produit.id}) }}?returnToProduct=true">
                                 <i class="fa-solid fa-cart-shopping"></i><span>add to cart</span>
                             </a>   
                         </button> 
-            
         </div>
     </div>
+    <h4>Description</h4>
+    <p>{{ produit.description }}</p>
     <hr>
-    <h4>Vos remarques sur le produit</h4>
+    <h4>Vos avis sur le produit</h4>
     {% for avis in produit.avis %}
         <p> <i class="fa-solid fa-user"></i>{{ avis.user.nom}}{{avis.user.prenom}}</p>
         <p>Commenté : {{ avis.dateDepot|date('y-m-d h:i')}}</p>
@@ -63,8 +60,6 @@
            Ajouter votre commentaire
         </button>
         {{ form_end(formAvis)}}
-        
-
     {% else %}
         <h2>Vous devez être connecté pour pouvoir commenter</h2>
         <a href=" {{path('app_login')}}" class ="btn btn-success">Se connecter</a> ou
@@ -72,12 +67,4 @@
     {% endif %}
      
 </div>    
-{% endblock %}
-{% block javascripts %}
-  <script>
- 
-
-
-
-  </script>
 {% endblock %}

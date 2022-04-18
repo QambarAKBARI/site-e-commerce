@@ -3,10 +3,19 @@
 {% block title %}Hello AvisController!{% endblock %}
 
 {% block body %}
+    <div>
     {% for a in avis %}
-        <p>{{ a.texte }}</p>
-        <p>{{ a.note }}</p>
+    <div>
+        <p>Votre avis sur le produit :{{ a.produit }}</p>
+        <p>Votre message :{{ a.texte }}</p>
+        <p>Votre note sur 5 :{{ a.note }}</p>
+        <p>Date : {{ a.dateDepot|date('d/m/y h:i') }}</p>
+    </div>
+    <hr>
     {% else %}
+
         <p>Vous n'avez pas de commentaire encore</p>
     {% endfor %}
+    </div>
+    <hr>
 {% endblock %}

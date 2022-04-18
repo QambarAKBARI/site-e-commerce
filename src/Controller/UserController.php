@@ -21,5 +21,15 @@ class UserController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/user/commande/show/{id}", name="user_commande_show")
+     */
+    public function userCommandeShow(User $user): Response
+    {
+        return $this->render('user/show.html.twig', [
+            'user' => $user,
+        ]);
+    }
+
 
 }

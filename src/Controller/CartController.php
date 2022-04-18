@@ -15,13 +15,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class CartController extends AbstractController
 {
 
-    /**
-     * @var ProduitRepository
-     */
+
     protected $produitRepository;
-    /**
-     * @var CartService
-     */
+
     protected $cartservice;
 
     public function __construct(ProduitRepository $produitRepository, CartService $cartService)
@@ -35,15 +31,12 @@ class CartController extends AbstractController
     /**
      * @Route("/cart/add/{id}", name="cart_add", requirements={"id":"\d+"})
      */
-    public function add($id, Request $request, Produit $product, EntityManagerInterface $em)
+    public function add($id, Request $request)
     {
 
         $produit = $this->produitRepository->find($id);
         if($produit) {
         
-            $qttInStock = $produit->getQuantite();
-            $qttInCart = $request->query->get('qtt');
-            
 
             $this->addFlash('success', "le produit a bien été ajouté au panier");
             $this->cartService->add($id);
@@ -69,7 +62,7 @@ class CartController extends AbstractController
     /**
      * @Route("/cart", name="cart_show")
      */
-    public function show()
+    public function showCart()
     {
         $form = $this->createForm(CommandeType::class);
         $detaileCart = $this->cartService->getDetailCartItem();
@@ -79,7 +72,6 @@ class CartController extends AbstractController
             'items' => $detaileCart,
             'confirmationForm'=>$form->createView(),
             'cartService' => $this->cartservice
-
         ]);
     }
 
@@ -102,7 +94,7 @@ class CartController extends AbstractController
     /**
      * @Route("/cart/decrements/{id}", name="cart_decrement", requirements={"id":"\d+"})
      */
-    public function decrement($id)
+    public function decrement($id, Request $request)
     {
 
         $produit = $this->produitRepository->find($id);
@@ -113,6 +105,11 @@ class CartController extends AbstractController
         $this->cartService->decrement($id);
 
         $this->addFlash('success', "le produit a bien été enlevé au panier");
+        if ($request->query->get('returnToProduct')) {
+            return $this->redirectToRoute('show_produit', [
+                'id' => $produit->getId()  
+            ]);
+        }
         return $this->redirectToRoute("cart_show");
     }
 

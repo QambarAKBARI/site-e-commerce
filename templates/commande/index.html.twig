@@ -12,8 +12,8 @@
             <th>Numéro de commande </th>
             <th>Adresse</th>
             <th>Date de commande</th>
-          
             <th>produit</th>
+            <th>Status</th>
             <th>Total</th>
         </tr>
     </thead>
@@ -30,6 +30,7 @@
                     {% endfor %}
                 </ul>
             </td>
+            <td> {{p.status}} </td>
             <td> {{p.total|amount}} </td>
         </tr>
         {% else %}

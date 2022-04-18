@@ -36,16 +36,14 @@ class CommandeConfirmationController extends AbstractController
     public function confirm(Request $request)
     {
         $form = $this->createForm(CommandeType::class);
-
         $form->handleRequest($request);
-        if (!$form->isSubmitted()) {
+
+        if (!$form->isSubmitted() && !$form->isValid()) {
             $this->addFlash('warning', 'vous devez remplir le formulaire de confirmation');
             return $this->redirectToRoute('cart_show');
         }
-
-        $user = $this->getUser();
+      
         $cartItems = $this->cartService->getDetailCartItem();
-
 
         if (count($cartItems) === 0) {
 
@@ -53,10 +51,8 @@ class CommandeConfirmationController extends AbstractController
 
             return $this->redirectToRoute('cart_show');
         }
-        /** @var Commande  */
+    
         $purchase = $form->getData();
-
-
         $this->persister->storePurchase($purchase);
 
         return $this->redirectToRoute('purchase_payement_form', [

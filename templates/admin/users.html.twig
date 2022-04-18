@@ -5,6 +5,7 @@
 {% block body %}
     {% for user in users %}
         <p>{{ user.nom }} {{ user.prenom }}</p>
+        <a href="{{ path('user_commande_show', {id: user.id}) }}">Les commandes effectués</a>
     {% else %}
         <p>Vous n'avez pas de commande encore</p>
     {% endfor %}
